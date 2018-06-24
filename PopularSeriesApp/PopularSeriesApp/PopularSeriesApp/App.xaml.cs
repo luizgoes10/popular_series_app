@@ -15,10 +15,8 @@ namespace PopularSeriesApp
 		{
 			InitializeComponent();
 
-
-            //MainPage = new MainPage();
-
             BuildDependencies();
+
             InitNavigation();
         }
 

@@ -9,6 +9,6 @@ namespace PopularSeriesApp.Services
     //Autor: Willian S Rogriguez
     public interface IPopularSeriesServices
     {
-        Task<IEnumerable<PopularSeries>> GetPopularSeriesAsync();
+        Task<PopularSeriesResult> GetPopularSeriesAsync(int page);
     }
 }

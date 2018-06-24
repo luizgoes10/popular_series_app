@@ -7,7 +7,7 @@ namespace PopularSeriesApp.Services.Infrastructure.Api
 {
     public interface IGetApi
     {
-        [Get("/popular?page=1&language=pt-BR")]
-        Task<IEnumerable<PopularSeries>> GetPopularSeriesAsync([Header("api_key")] string authorization);
+        [Get("/top_rated?page={page}&language={lang}&api_key={key}")]
+        Task<PopularSeriesResult> GetPopularSeriesAsync(int page, string lang, string key);
     }
 }

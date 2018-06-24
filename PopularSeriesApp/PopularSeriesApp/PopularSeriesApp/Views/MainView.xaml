@@ -1,12 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PopularSeriesApp.Views.MainView">
+             x:Class="PopularSeriesApp.Views.MainView"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Próxima Página" Command="{Binding NavigateListPageCommand}"/>
+        <ToolbarItem Order="Secondary" Text="Anterior" Command="{Binding NavigateListBackPageCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ListView x:Name="lvSeries"
+                  ItemsSource="{Binding Items}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="True"
+                  HorizontalOptions="FillAndExpand"
+                  CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" Spacing="20" >
+                            <Label Text="{Binding name}" FontSize="Medium" />
+                            <Label Text="{Binding vote_average}" FontSize="15"/>
+                            <Image Source="{Binding Thumb}" HorizontalOptions="Start"/>
+
+                        </StackLayout>
+                        
+                    </ViewCell> 
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

@@ -18,6 +18,7 @@ namespace PopularSeriesApp.Services.Navigation
         {
             get { return Application.Current; }
         }
+
         public NavigationService()
         {
             _mappings = new Dictionary<Type, Type>();
@@ -92,6 +93,7 @@ namespace PopularSeriesApp.Services.Navigation
             }
             else
             {
+                //Colocar navigation page
                 CurrentApplication.MainPage = new NavigationPage(page);
             }
 
@@ -128,6 +130,7 @@ namespace PopularSeriesApp.Services.Navigation
         {
             _mappings.Add(typeof(MainViewModel), typeof(MainView));
             _mappings.Add(typeof(DetailsViewModel), typeof(DetailsView));
+            _mappings.Add(typeof(RootViewModel), typeof(RootView));
         }
     }
 }
