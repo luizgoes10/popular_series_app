@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PopularSeriesApp.ViewModels;
+using PopularSeriesApp.ViewModels.Base;
 using PopularSeriesApp.Views;
 using Xamarin.Forms;
 

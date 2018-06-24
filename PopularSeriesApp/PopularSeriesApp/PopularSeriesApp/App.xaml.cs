@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using PopularSeriesApp.Views;
 using Xamarin.Forms.Xaml;
+using PopularSeriesApp.ViewModels.Base;
+using PopularSeriesApp.Services.Navigation;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace PopularSeriesApp
@@ -14,10 +16,24 @@ namespace PopularSeriesApp
 			InitializeComponent();
 
 
-			MainPage = new MainPage();
-		}
+            //MainPage = new MainPage();
 
-		protected override void OnStart ()
+            BuildDependencies();
+            InitNavigation();
+        }
+
+        public void BuildDependencies()
+        {
+            ViewModelLocator.Instance.Build();
+        }
+
+        async void InitNavigation()
+        {
+            var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+            await navigationService.InitializeAsync();
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}

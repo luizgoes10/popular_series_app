@@ -4,7 +4,11 @@ using System.Text;
 
 namespace PopularSeriesApp.ViewModels
 {
-    public class DetailsViewModel
+    public class DetailsViewModel : ViewModelBase
     {
+        public DetailsViewModel() : base("Detalhes")
+        {
+
+        }
     }
 }
