@@ -7,7 +7,7 @@ namespace PopularSeriesApp.Services.Infrastructure.Api
 {
     public interface IGetApi
     {
-        [Get("/games/?fields=id,name,summary,popularity,cover,esrb,websites&order=popularity:desc")]
-        Task<IEnumerable<PopularSeries>> GetPopularSeriesAsync([Header("user-key")] string authorization);
+        [Get("/popular?page=1&language=pt-BR")]
+        Task<IEnumerable<PopularSeries>> GetPopularSeriesAsync([Header("api_key")] string authorization);
     }
 }
