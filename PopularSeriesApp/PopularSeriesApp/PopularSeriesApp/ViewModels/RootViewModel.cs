@@ -8,7 +8,7 @@ namespace PopularSeriesApp.ViewModels
     {
         public RootViewModel() : base("Séries Populares")
         {
-
+            
         }
     }
 }

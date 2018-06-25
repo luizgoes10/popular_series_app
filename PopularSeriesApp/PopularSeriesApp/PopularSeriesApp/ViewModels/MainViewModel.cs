@@ -88,14 +88,7 @@ namespace PopularSeriesApp.ViewModels
 
         async Task ItemClickCommandExecuteAsync(PopularSeries model)
         {
-            await NavigationService.NavigateToAsync<DetailsViewModel>(new PopularSeriesParameters
-            {
-                //Id = model.Id,
-                //Cover = model.Cover.ScreenshotBig,
-                //Name = model.Name,
-                //Popularity = model.Popularity,
-                //Summary = model.Summary,
-            });
+            await NavigationService.NavigateToAsync<DetailsViewModel>(model);
         }
 
         async Task<PopularSeriesResult> GetItemsAsync()

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PopularSeriesApp.Views.MainView"
+             xmlns:behaviors="clr-namespace:PopularSeriesApp.Services.Behaviors;assembly=PopularSeriesApp"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Próxima Página" Command="{Binding NavigateListPageCommand}"/>
@@ -13,7 +14,8 @@
                   VerticalOptions="FillAndExpand"
                   HasUnevenRows="True"
                   HorizontalOptions="FillAndExpand"
-                  CachingStrategy="RecycleElement">
+                  CachingStrategy="RecycleElement" 
+                  behaviors:AttachedItemTappedBehavior.Command="{Binding ItemClickCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
