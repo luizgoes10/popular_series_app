@@ -27,6 +27,33 @@ namespace PopularSeriesApp.ViewModels
             get { return _isBusy; }
             set { _isBusy = value; OnPropertyChanged(); }
         }
+        Color _barBackGroundColor;
+        public Color BarBackGroundColor
+        {
+            get
+            {
+                return _barBackGroundColor;
+            }
+            set
+            {
+                _barBackGroundColor = value;
+                OnPropertyChanged();
+            }
+        }
+
+        Color _buttonsBackGroundColor;
+        public Color ButtonsBackGroundColor
+        {
+            get
+            {
+                return _buttonsBackGroundColor;
+            }
+            set
+            {
+                _buttonsBackGroundColor = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ViewModelBase(string title)
         {

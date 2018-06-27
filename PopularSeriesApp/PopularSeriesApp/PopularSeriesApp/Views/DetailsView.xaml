@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PopularSeriesApp.Views.DetailsView">
+             x:Class="PopularSeriesApp.Views.DetailsView"
+             Title="{Binding Name}">
     <ContentPage.Content>
         <Grid
             HorizontalOptions="FillAndExpand"
@@ -15,8 +16,16 @@
                 <RowDefinition
                     Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout>
-                <Label Text="{Binding Name}" />
+            <StackLayout Padding="10">
+                <Label Text="{Binding Name}" FontSize="20"/>
+
+                <Image Source="{Binding Thumb}" HorizontalOptions="StartAndExpand"/>
+
+                <Label Text="{Binding Vote_average}" FontSize="18"/>
+
+                <Label Text="{Binding Overview}"/>
+
+                <Button Text="Voltar" Command="{Binding NavigateBackCommand}" BackgroundColor="{Binding ButtonsBackGroundColor}" TextColor="White" WidthRequest="100" HeightRequest="50"/>
 
             </StackLayout>
         </Grid>

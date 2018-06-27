@@ -26,7 +26,7 @@ namespace PopularSeriesApp.Services.Navigation
         }
 
         public async Task InitializeAsync()
-                 => await NavigateToAsync<MainViewModel>();
+                 => await NavigateToAsync<RootViewModel>();
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
             => InternalNavigateToAsync(typeof(TViewModel), null);
@@ -87,14 +87,24 @@ namespace PopularSeriesApp.Services.Navigation
 
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
 
-            if (navigationPage != null)
+            if (navigationPage != null && parameter != null)
             {
                 await navigationPage.PushAsync(page);
             }
             else
             {
-                //Colocar navigation page
-                CurrentApplication.MainPage = new NavigationPage(page);
+                if (parameter != null)
+                {
+                    CurrentApplication.MainPage = new NavigationPage(page)
+                    {
+                        BarBackgroundColor = Color.FromHex("#64449f")
+                    };
+                }
+                else
+                {
+                    //Colocar navigation page caso não for usar Drawer
+                    CurrentApplication.MainPage = page;
+                }
             }
 
             await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);

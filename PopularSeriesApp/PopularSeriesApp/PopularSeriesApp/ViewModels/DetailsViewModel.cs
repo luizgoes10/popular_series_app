@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PopularSeriesApp.ViewModels
 {
@@ -32,9 +34,23 @@ namespace PopularSeriesApp.ViewModels
             get { return _thumb; }
             set { _thumb = value; OnPropertyChanged(); }
         }
+        string _overview;
+        public string Overview
+        {
+            get { return _overview; }
+            set { _overview = value; OnPropertyChanged(); }
+        }
+        public ICommand NavigateBackCommand { get; }
+
         public DetailsViewModel() : base("")
         {
-            Title = "Detalhes";
+            NavigateBackCommand = new Command(ExecuteNavigateCommandAsync);
+            ButtonsBackGroundColor = Color.FromHex("#64449f");
+        }
+
+        private async void ExecuteNavigateCommandAsync(object obj)
+        {
+            await NavigationService.NavigateToAsync<RootViewModel>(null);
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -43,6 +59,7 @@ namespace PopularSeriesApp.ViewModels
             Name = param.name;
             Popularity = param.popularity;
             Vote_average = param.vote_average;
+            Overview = param.overview;
             Thumb = param.Thumb;
             return base.InitializeAsync(navigationData);
         }

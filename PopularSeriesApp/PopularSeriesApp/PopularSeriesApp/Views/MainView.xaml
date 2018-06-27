@@ -21,8 +21,10 @@
                     <ViewCell>
                         <StackLayout Padding="10" Spacing="20" >
                             <Label Text="{Binding name}" FontSize="Medium" />
-                            <Label Text="{Binding vote_average}" FontSize="15"/>
+                            
                             <Image Source="{Binding Thumb}" HorizontalOptions="Start"/>
+
+                            <Label Text="{Binding vote_average}" FontSize="15"/>
 
                         </StackLayout>
                         

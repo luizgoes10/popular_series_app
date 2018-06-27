@@ -40,6 +40,7 @@ namespace PopularSeriesApp.ViewModels
             NavigateListBackPageCommand = new Command(ExecuteNavigateListBackPageCommand);
 
             Items = new ObservableCollection<PopularSeries>();
+
         }
 
       

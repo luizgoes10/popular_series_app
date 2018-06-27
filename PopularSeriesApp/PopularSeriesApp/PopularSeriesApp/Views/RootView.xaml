@@ -7,7 +7,7 @@
     <pages:RootViewMaster x:Name="MasterPage" />
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
-    <NavigationPage>
+        <NavigationPage BarBackgroundColor="{Binding BarBackGroundColor}">
       <x:Arguments>
         <pages:MainView />
       </x:Arguments>
