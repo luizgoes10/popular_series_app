@@ -25,6 +25,14 @@ namespace PopularSeriesApp.ViewModels
 
         public PopularSeriesResult Result { get; set; }
 
+        int _atualPage;
+        public int AtualPage
+        {
+            get { return _atualPage; }
+            set { _atualPage = value; OnPropertyChanged(); }
+        }
+
+
         int count = 1;
 
         public RootViewModel(IPopularSeriesServices popularSeriesService) : base("Séries Populares")
@@ -57,14 +65,25 @@ namespace PopularSeriesApp.ViewModels
             }
         }
 
-        private async void ExecuteNavigateListCommand()
+        private async void ExecuteNavigateListCommand(object obj)
         {
+            AtualPage = Result.page;
+
             if (Result.total_pages >= count)
             {
-                count++;
-                Result = await _popularSeriesServices.GetPopularSeriesAsync(count);
-                Items.Clear();
-                AddItems(Result.results);
+                if (AtualPage == count)
+                {
+                    count++;
+                    Result = await _popularSeriesServices.GetPopularSeriesAsync(count);
+                    Items.Clear();
+                    AddItems(Result.results);
+                }
+                else
+                {
+                    Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page + 1);
+                    Items.Clear();
+                    AddItems(Result.results);
+                }
             }
             else
             {
@@ -76,8 +95,18 @@ namespace PopularSeriesApp.ViewModels
         public override async Task InitializeAsync(object navigationData)
         {
             await base.InitializeAsync(navigationData);
+            int page = 0;
+            if (navigationData == null)
+            {
+                page = 1;
 
-            Result = await GetItemsAsync();
+                Result = await GetItemsAsync(page);
+            }
+            else
+            {
+                page = (int)navigationData;
+                Result = await GetItemsAsync(page);
+            }
 
             Items.Clear();
             AddItems(Result.results);
@@ -85,11 +114,12 @@ namespace PopularSeriesApp.ViewModels
 
         async Task ItemClickCommandExecuteAsync(PopularSeries model)
         {
+            model.NumberPage = Result.page;
             await NavigationService.NavigateToAsync<DetailsViewModel>(model);
         }
 
-        async Task<PopularSeriesResult> GetItemsAsync()
-            => await _popularSeriesServices.GetPopularSeriesAsync(1);
+        async Task<PopularSeriesResult> GetItemsAsync(int page)
+            => await _popularSeriesServices.GetPopularSeriesAsync(page);
 
         void AddItems(IEnumerable<PopularSeries> items)
             => items?.ToList()?.ForEach(i => Items.Add(i));

@@ -18,6 +18,8 @@ namespace PopularSeriesApp.Models
         public string overview { get; set; }
         public string[] origin_country { get; set; }
 
+        public int NumberPage { get; set; }
+
         public string Thumb
         {
             get { return $"{AppSettings.ApiImageBaseUrl}w200{poster_path}"; }

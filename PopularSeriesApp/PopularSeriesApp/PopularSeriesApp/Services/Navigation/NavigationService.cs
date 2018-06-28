@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PopularSeriesApp.Models;
 using PopularSeriesApp.ViewModels;
 using PopularSeriesApp.ViewModels.Base;
 using PopularSeriesApp.Views;
@@ -87,13 +88,13 @@ namespace PopularSeriesApp.Services.Navigation
 
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
 
-            if (navigationPage != null && parameter != null)
+            if (navigationPage != null && parameter != null && !parameter.GetType().IsPrimitive)
             {
                 await navigationPage.PushAsync(page);
             }
             else
             {
-                if (parameter != null)
+                if (parameter != null && !parameter.GetType().IsPrimitive)
                 {
                     CurrentApplication.MainPage = new NavigationPage(page)
                     {

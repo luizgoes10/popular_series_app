@@ -25,7 +25,7 @@
 
                 <Label Text="{Binding Overview}"/>
 
-                <Button Text="Voltar" Command="{Binding NavigateBackCommand}" BackgroundColor="{Binding ButtonsBackGroundColor}" TextColor="White" WidthRequest="100" HeightRequest="50"/>
+                <Button Text="Voltar" Command="{Binding NavigateBackCommand}" CommandParameter="{Binding NumberPage}" BackgroundColor="{Binding ButtonsBackGroundColor}" TextColor="White" Margin="100,30,100,0"/>
 
             </StackLayout>
         </Grid>

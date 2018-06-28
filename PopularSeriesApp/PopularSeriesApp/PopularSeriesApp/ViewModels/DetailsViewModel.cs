@@ -40,6 +40,12 @@ namespace PopularSeriesApp.ViewModels
             get { return _overview; }
             set { _overview = value; OnPropertyChanged(); }
         }
+        int _numberPage;
+        public int NumberPage
+        {
+            get { return _numberPage; }
+            set { _numberPage = value; OnPropertyChanged(); }
+        }
         public ICommand NavigateBackCommand { get; }
 
         public DetailsViewModel() : base("")
@@ -50,7 +56,7 @@ namespace PopularSeriesApp.ViewModels
 
         private async void ExecuteNavigateCommandAsync(object obj)
         {
-            await NavigationService.NavigateToAsync<RootViewModel>(null);
+            await NavigationService.NavigateToAsync<RootViewModel>(obj);
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -61,6 +67,7 @@ namespace PopularSeriesApp.ViewModels
             Vote_average = param.vote_average;
             Overview = param.overview;
             Thumb = param.Thumb;
+            NumberPage = param.NumberPage;
             return base.InitializeAsync(navigationData);
         }
 
