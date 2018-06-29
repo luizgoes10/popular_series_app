@@ -52,10 +52,10 @@ namespace PopularSeriesApp.ViewModels
 
         private async void ExecuteNavigateListBackPageCommand(object obj)
         {
-            if (1 < count)
+            if (1 < Result.page)
             {
                 count--;
-                Result = await _popularSeriesServices.GetPopularSeriesAsync(count);
+                Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page - 1);
                 Items.Clear();
                 AddItems(Result.results);
             }
