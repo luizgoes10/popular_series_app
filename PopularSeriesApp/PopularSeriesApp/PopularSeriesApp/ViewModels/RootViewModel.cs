@@ -1,5 +1,6 @@
 ﻿using PopularSeriesApp.Models;
 using PopularSeriesApp.Services;
+using PopularSeriesApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,8 @@ namespace PopularSeriesApp.ViewModels
 
         public ICommand ItemClickCommand { get; }
 
+        public ICommand ItemClickMasterCommand { get; }
+
         public ICommand NavigateListPageCommand { get; }
 
         public ICommand NavigateListBackPageCommand { get; }
@@ -24,6 +27,8 @@ namespace PopularSeriesApp.ViewModels
         public ObservableCollection<PopularSeries> Items { get; }
 
         public PopularSeriesResult Result { get; set; }
+
+        public ObservableCollection<RootViewMenuItem> MenuItems { get; set; }
 
         int _atualPage;
         public int AtualPage
@@ -47,7 +52,24 @@ namespace PopularSeriesApp.ViewModels
 
             NavigateListBackPageCommand = new Command(ExecuteNavigateListBackPageCommand);
 
+            ItemClickMasterCommand = new Command(ExecuteNavigateMasterCommand);
+
             Items = new ObservableCollection<PopularSeries>();
+
+            MenuItems = new ObservableCollection<RootViewMenuItem>(new[]
+             {
+                    new RootViewMenuItem { Id = 0, Title = "Mais Populares", Image = "hearts.png" },
+                    new RootViewMenuItem { Id = 1, Title = "No Ar", Image = "tv.png" },
+                    new RootViewMenuItem { Id = 2, Title = "Vídeos", Image = "videos.png"},
+                    new RootViewMenuItem { Id = 3, Title = "Mais Votadas", Image = "mais.png" },
+                    new RootViewMenuItem { Id = 4, Title = "Mudar Idioma", Image = "language.png" },
+                    new RootViewMenuItem { Id = 5, Title = "Configurações", Image = "settings.png" },
+                });
+        }
+
+        private async void ExecuteNavigateMasterCommand(object obj)
+        {
+            await DialogService.AlertAsync("Atenção.", "Não implementado cabeção.", "OK");
         }
 
         private async void ExecuteNavigateListBackPageCommand(object obj)

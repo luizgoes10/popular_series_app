@@ -39,6 +39,7 @@ namespace PopularSeriesApp.ViewModels.Base
             _containerBuilder.RegisterType<MainViewModel>();
             _containerBuilder.RegisterType<DetailsViewModel>();
             _containerBuilder.RegisterType<RootViewModel>();
+            _containerBuilder.RegisterType<RootViewMasterViewModel>();
 
             _containerBuilder.Register(api =>
             {

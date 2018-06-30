@@ -142,6 +142,7 @@ namespace PopularSeriesApp.Services.Navigation
             _mappings.Add(typeof(MainViewModel), typeof(MainView));
             _mappings.Add(typeof(DetailsViewModel), typeof(DetailsView));
             _mappings.Add(typeof(RootViewModel), typeof(RootView));
+            _mappings.Add(typeof(RootViewMasterViewModel), typeof(RootViewMaster));
         }
     }
 }
