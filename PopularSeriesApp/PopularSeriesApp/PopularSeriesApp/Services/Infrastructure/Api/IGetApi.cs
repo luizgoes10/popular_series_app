@@ -8,6 +8,9 @@ namespace PopularSeriesApp.Services.Infrastructure.Api
     public interface IGetApi
     {
         [Get("/top_rated?page={page}&language={lang}&api_key={key}")]
+        Task<PopularSeriesResult> GetTopRatedSeriesAsync(int page, string lang, string key);
+
+        [Get("/popular?page={page}&language={lang}&api_key={key}")]
         Task<PopularSeriesResult> GetPopularSeriesAsync(int page, string lang, string key);
     }
 }

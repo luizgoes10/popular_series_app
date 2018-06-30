@@ -103,7 +103,6 @@ namespace PopularSeriesApp.Services.Navigation
                 }
                 else
                 {
-                    //Colocar navigation page caso não for usar Drawer
                     CurrentApplication.MainPage = page;
                 }
             }

@@ -10,5 +10,7 @@ namespace PopularSeriesApp.Services
     public interface IPopularSeriesServices
     {
         Task<PopularSeriesResult> GetPopularSeriesAsync(int page);
+
+        Task<PopularSeriesResult> GetTopRatedSeriesAsync(int page);
     }
 }

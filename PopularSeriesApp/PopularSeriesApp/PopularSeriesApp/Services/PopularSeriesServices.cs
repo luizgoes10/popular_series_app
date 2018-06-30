@@ -14,9 +14,15 @@ namespace PopularSeriesApp.Services
         {
             _api = api;
         }
+
         public Task<PopularSeriesResult> GetPopularSeriesAsync(int page)
         {
             return _api.GetPopularSeriesAsync(page, AppSettings.ApiLanBr, AppSettings.ApiKey);
+        }
+
+        public Task<PopularSeriesResult> GetTopRatedSeriesAsync(int page)
+        {
+            return _api.GetTopRatedSeriesAsync(page, AppSettings.ApiLanBr, AppSettings.ApiKey);
         }
     }
 }

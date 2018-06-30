@@ -30,6 +30,13 @@ namespace PopularSeriesApp.ViewModels
 
         public ObservableCollection<RootViewMenuItem> MenuItems { get; set; }
 
+        bool _isPresent;
+        public bool IsPresent
+        {
+            get { return _isPresent; }
+            set { _isPresent = value; OnPropertyChanged(); }
+        }
+        
         int _atualPage;
         public int AtualPage
         {
@@ -40,7 +47,7 @@ namespace PopularSeriesApp.ViewModels
 
         int count = 1;
 
-        public RootViewModel(IPopularSeriesServices popularSeriesService) : base("Séries Populares")
+        public RootViewModel(IPopularSeriesServices popularSeriesService) : base("Mais Votadas")
         {
             BarBackGroundColor = Color.FromHex("#64449f");
 
@@ -69,7 +76,27 @@ namespace PopularSeriesApp.ViewModels
 
         private async void ExecuteNavigateMasterCommand(object obj)
         {
-            await DialogService.AlertAsync("Atenção.", "Não implementado cabeção.", "OK");
+            var opcao = obj as RootViewMenuItem;
+            switch (opcao.Id)
+            {
+                case 0:
+                    Result = await _popularSeriesServices.GetPopularSeriesAsync(1);
+                    Items.Clear();
+                    AddItems(Result.results);
+                    Title = "Mais Populares";
+                    IsPresent = false;
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
         }
 
         private async void ExecuteNavigateListBackPageCommand(object obj)
@@ -77,7 +104,7 @@ namespace PopularSeriesApp.ViewModels
             if (1 < Result.page)
             {
                 count--;
-                Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page - 1);
+                Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page - 1);
                 Items.Clear();
                 AddItems(Result.results);
             }
@@ -96,13 +123,13 @@ namespace PopularSeriesApp.ViewModels
                 if (AtualPage == count)
                 {
                     count++;
-                    Result = await _popularSeriesServices.GetPopularSeriesAsync(count);
+                    Result = await _popularSeriesServices.GetTopRatedSeriesAsync(count);
                     Items.Clear();
                     AddItems(Result.results);
                 }
                 else
                 {
-                    Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page + 1);
+                    Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page + 1);
                     Items.Clear();
                     AddItems(Result.results);
                 }
@@ -141,7 +168,7 @@ namespace PopularSeriesApp.ViewModels
         }
 
         async Task<PopularSeriesResult> GetItemsAsync(int page)
-            => await _popularSeriesServices.GetPopularSeriesAsync(page);
+            => await _popularSeriesServices.GetTopRatedSeriesAsync(page);
 
         void AddItems(IEnumerable<PopularSeries> items)
             => items?.ToList()?.ForEach(i => Items.Add(i));
