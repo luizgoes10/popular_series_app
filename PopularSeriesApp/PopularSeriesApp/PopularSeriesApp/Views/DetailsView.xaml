@@ -4,7 +4,8 @@
              x:Class="PopularSeriesApp.Views.DetailsView"
              Title="{Binding Name}">
     <ContentPage.Content>
-        <Grid
+        <ScrollView>
+            <Grid
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             RowSpacing="0">
@@ -29,6 +30,6 @@
 
             </StackLayout>
         </Grid>
-       
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
