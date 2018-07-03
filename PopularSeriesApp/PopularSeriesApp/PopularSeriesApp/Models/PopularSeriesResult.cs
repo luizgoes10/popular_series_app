@@ -10,6 +10,7 @@ namespace PopularSeriesApp.Models
         public int total_results { get; set; }
         public int total_pages { get; set; }
         public List<PopularSeries> results { get; set; }
+        public string NamePage { get; set; }
 
     }
 }

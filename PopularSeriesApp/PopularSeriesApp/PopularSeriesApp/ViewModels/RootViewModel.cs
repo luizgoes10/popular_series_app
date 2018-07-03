@@ -81,6 +81,7 @@ namespace PopularSeriesApp.ViewModels
             {
                 case 0:
                     Result = await _popularSeriesServices.GetPopularSeriesAsync(1);
+                    Result.NamePage = "Populares";
                     Items.Clear();
                     AddItems(Result.results);
                     Title = "Mais Populares";
@@ -103,10 +104,27 @@ namespace PopularSeriesApp.ViewModels
         {
             if (1 < Result.page)
             {
-                count--;
-                Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page - 1);
-                Items.Clear();
-                AddItems(Result.results);
+                switch (Result.NamePage)
+                {
+                    case "TopRated":
+                        count--;
+                        Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page -1);
+                        Items.Clear();
+                        AddItems(Result.results);
+                        Result.NamePage = "TopRated";
+                        break;
+                    case "Populares":
+                        count--;
+                        Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page - 1);
+                        Items.Clear();
+                        AddItems(Result.results);
+                        Result.NamePage = "Populares";
+                        break;
+                }
+                //count--;
+                //Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page - 1);
+                //Items.Clear();
+                //AddItems(Result.results);
             }
             else
             {
@@ -122,16 +140,43 @@ namespace PopularSeriesApp.ViewModels
             {
                 if (AtualPage == count)
                 {
-                    count++;
-                    Result = await _popularSeriesServices.GetTopRatedSeriesAsync(count);
-                    Items.Clear();
-                    AddItems(Result.results);
+                    switch (Result.NamePage)
+                    {
+                        case "TopRated":
+                            count++;
+                            Result = await _popularSeriesServices.GetTopRatedSeriesAsync(count);
+                            Items.Clear();
+                            AddItems(Result.results);
+                            Result.NamePage = "TopRated";
+                            break;
+                        case "Populares":
+                            count++;
+                            Result = await _popularSeriesServices.GetPopularSeriesAsync(count);
+                            Items.Clear();
+                            AddItems(Result.results);
+                            Result.NamePage = "Populares";
+                            break;
+                    }
+                    
                 }
                 else
                 {
-                    Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page + 1);
-                    Items.Clear();
-                    AddItems(Result.results);
+                    switch (Result.NamePage)
+                    {
+                        case "TopRated":
+                            Result = await _popularSeriesServices.GetTopRatedSeriesAsync(Result.page + 1);
+                            Items.Clear();
+                            AddItems(Result.results);
+                            Result.NamePage = "TopRated";
+                            break;
+                        case "Populares":
+                            Result = await _popularSeriesServices.GetPopularSeriesAsync(Result.page + 1);
+                            Items.Clear();
+                            AddItems(Result.results);
+                            Result.NamePage = "Populares";
+                            break;
+                    }
+         
                 }
             }
             else
@@ -143,32 +188,53 @@ namespace PopularSeriesApp.ViewModels
 
         public override async Task InitializeAsync(object navigationData)
         {
-            await base.InitializeAsync(navigationData);
-            int page = 0;
+            var param = new Params();
+
             if (navigationData == null)
             {
-                page = 1;
+                param.NamePage = "TopRated";
 
-                Result = await GetItemsAsync(page);
+                param.NumberPage = 1;
+                
+                Result = await GetItemsAsync(param);
+
+                Result.NamePage = param.NamePage;
             }
             else
             {
-                page = (int)navigationData;
-                Result = await GetItemsAsync(page);
+                param = navigationData as Params;
+
+                Result = await GetItemsAsync(param);
+
+                Result.NamePage = param.NamePage;
+
+                Title = param.Title;
             }
 
             Items.Clear();
             AddItems(Result.results);
+
+            await base.InitializeAsync(navigationData);
         }
 
         async Task ItemClickCommandExecuteAsync(PopularSeries model)
         {
             model.NumberPage = Result.page;
+            model.NamePage = Result.NamePage;
+            model.TitlePage = Title;
             await NavigationService.NavigateToAsync<DetailsViewModel>(model);
         }
 
-        async Task<PopularSeriesResult> GetItemsAsync(int page)
-            => await _popularSeriesServices.GetTopRatedSeriesAsync(page);
+        async Task<PopularSeriesResult> GetItemsAsync(Params param)
+        {
+            if (param.NamePage == "TopRated")
+                return await _popularSeriesServices.GetTopRatedSeriesAsync(param.NumberPage);
+
+            else if (param.NamePage == "Populares")
+                return await _popularSeriesServices.GetPopularSeriesAsync(param.NumberPage);
+
+            else return null;
+        }
 
         void AddItems(IEnumerable<PopularSeries> items)
             => items?.ToList()?.ForEach(i => Items.Add(i));

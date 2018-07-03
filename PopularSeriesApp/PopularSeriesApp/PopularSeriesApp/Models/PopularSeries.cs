@@ -19,6 +19,8 @@ namespace PopularSeriesApp.Models
         public string[] origin_country { get; set; }
 
         public int NumberPage { get; set; }
+        public string NamePage { get; set; }
+        public string TitlePage { get; set; }
 
         public string Thumb
         {

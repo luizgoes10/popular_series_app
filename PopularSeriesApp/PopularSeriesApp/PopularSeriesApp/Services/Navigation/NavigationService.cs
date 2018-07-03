@@ -88,13 +88,13 @@ namespace PopularSeriesApp.Services.Navigation
 
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
 
-            if (navigationPage != null && parameter != null && !parameter.GetType().IsPrimitive)
+            if (navigationPage != null && parameter != null && !parameter.GetType().Equals(typeof(Params)))
             {
                 await navigationPage.PushAsync(page);
             }
             else
             {
-                if (parameter != null && !parameter.GetType().IsPrimitive)
+                if (parameter != null && !parameter.GetType().Equals(typeof(Params)))
                 {
                     CurrentApplication.MainPage = new NavigationPage(page)
                     {
