@@ -92,6 +92,12 @@ namespace PopularSeriesApp.ViewModels
                 case 2:
                     break;
                 case 3:
+                    Result = await _popularSeriesServices.GetTopRatedSeriesAsync(1);
+                    Result.NamePage = "TopRated";
+                    Items.Clear();
+                    AddItems(Result.results);
+                    Title = "Mais Votadas";
+                    IsPresent = false;
                     break;
                 case 4:
                     break;
