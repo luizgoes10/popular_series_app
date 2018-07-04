@@ -58,6 +58,12 @@ namespace PopularSeriesApp.ViewModels
             get { return _titlePage; }
             set { _titlePage = value; OnPropertyChanged(); }
         }
+        string _back = "Voltar";
+        public string Back
+        {
+            get { return _back; }
+            set { _back = value; OnPropertyChanged(); }
+        }
         public ICommand NavigateBackCommand { get; }
 
         public DetailsViewModel() : base("")
@@ -86,6 +92,10 @@ namespace PopularSeriesApp.ViewModels
             NumberPage = param.NumberPage;
             NamePage = param.NamePage;
             TitlePage = param.TitlePage;//página anterior
+            if(param.original_language == "en")
+            {
+                Back = "Back to List";
+            }
             return base.InitializeAsync(navigationData);
         }
 

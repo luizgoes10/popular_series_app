@@ -12,5 +12,8 @@ namespace PopularSeriesApp.Services.Infrastructure.Api
 
         [Get("/popular?page={page}&language={lang}&api_key={key}")]
         Task<PopularSeriesResult> GetPopularSeriesAsync(int page, string lang, string key);
+
+        [Get("/on_the_air?page={page}&language={lang}&api_key={key}")]
+        Task<PopularSeriesResult> GetOnTheAirSeriesAsync(int page, string lang, string key);
     }
 }

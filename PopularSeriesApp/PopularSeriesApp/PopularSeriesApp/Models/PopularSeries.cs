@@ -10,7 +10,7 @@ namespace PopularSeriesApp.Models
         public decimal popularity { get; set; }
         public int vote_count { get; set; }
         public decimal vote_average { get; set; }
-        public DateTime first_air_date { get; set; }
+        public DateTime? first_air_date { get; set; }
         public string poster_path { get; set; }
         public int[] genre_ids { get; set; }
         public string original_language { get; set; }

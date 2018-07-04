@@ -26,7 +26,7 @@
                     <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="Séries Populares"
+              Text="{Binding Header}"
               Style="{DynamicResource SubtitleStyle}"/>
                 </Grid>
             </ListView.Header>

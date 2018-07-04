@@ -5,8 +5,8 @@
              xmlns:behaviors="clr-namespace:PopularSeriesApp.Services.Behaviors;assembly=PopularSeriesApp"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Text="Próxima Página" Command="{Binding NavigateListPageCommand}"/>
-        <ToolbarItem Order="Secondary" Text="Anterior" Command="{Binding NavigateListBackPageCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{Binding Next}" Command="{Binding NavigateListPageCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{Binding After}" Command="{Binding NavigateListBackPageCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView x:Name="lvSeries"

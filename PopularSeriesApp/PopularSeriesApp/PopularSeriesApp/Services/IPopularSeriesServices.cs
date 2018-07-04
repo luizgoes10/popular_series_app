@@ -9,8 +9,10 @@ namespace PopularSeriesApp.Services
     //Autor: Willian S Rogriguez
     public interface IPopularSeriesServices
     {
-        Task<PopularSeriesResult> GetPopularSeriesAsync(int page);
+        Task<PopularSeriesResult> GetPopularSeriesAsync(int page, string language = null);
 
-        Task<PopularSeriesResult> GetTopRatedSeriesAsync(int page);
+        Task<PopularSeriesResult> GetTopRatedSeriesAsync(int page, string language = null);
+
+        Task<PopularSeriesResult> GetOnTheAirSeriesAsync(int page, string language = null);
     }
 }
