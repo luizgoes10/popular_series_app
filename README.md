@@ -1,5 +1,3 @@
-# To view the project, go to branch development.
-
 # Startup instructions.
 This app shows all the most popular series, 
 by poll and those that are on the air.
